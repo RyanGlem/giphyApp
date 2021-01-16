@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import GifDisplay from './gifDisplay'
-import axios from 'axios'
 
 
 class GifSearch extends Component {
@@ -12,9 +11,10 @@ class GifSearch extends Component {
             
             searchTerm: "",
             urls: [],
-            match: false
+            match: false,
+            key: 'AyuSIWGMSt6cQ5wox8Kp661mPyQzLONo'
         }
-
+        
         console.log (this.state.urls)
     }
 
@@ -41,16 +41,39 @@ class GifSearch extends Component {
     }
 
 
+    render () { 
+        return (
+            <div className="search">
+                <div>
+                    <div>
+                    <label className="title">Welcome to the World of Giphy</label>
+                   </div>
+                    <label className="label">Search for: </label>
+                    <input
+                        className="text"
+                        type="text"
+                        onChange={this.handleChange}
+                        value= {this.state.searchTerm}
+                        >
+                    </input>
+                </div>   
+                   
+                    <button className="button" onClick={this.gifSearch} >Search</button>
+                  
+                <div>
+                           
+                            {this.state.urls.map((elem, index) => {
+                                return (
+                                <GifDisplay 
+                                key={index} 
+                                url = {elem.images.original.url}/>
+                                )
+                            })} 
+                    
+                </div>
+            </div>
+        )
 
-    render () { return (<div> <input
-                                type="text"
-                                onChange={this.handleChange}
-                                value= {this.state.searchTerm}>
-                                </input>
-                                <button onClick={this.gifSearch} >Search</button>
-        {this.state.urls.map((elem, index) => {return (<GifDisplay key={index} url = {elem.images.original.url}/>)})} </div>)
-
-    
     }
 
 }
